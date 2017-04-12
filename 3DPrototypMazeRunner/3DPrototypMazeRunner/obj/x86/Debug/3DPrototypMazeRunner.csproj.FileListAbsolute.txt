@@ -22,3 +22,5 @@ D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMa
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\obj\x86\Debug\3DPrototypMazeRunner.exe
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\obj\x86\Debug\3DPrototypMazeRunner.pdb
+D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Textures\Cube.xnb
+D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Bitmaps\Level1.xnb

@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _3DPrototypMazeRunner
 {
-
+    /// <summary>
+    /// Primitive Cuboid based on 8 verticies
+    /// </summary>
     class Cube
     {
         private VertexPositionColorTexture[] Verts = new VertexPositionColorTexture[8];
@@ -14,6 +16,13 @@ namespace _3DPrototypMazeRunner
         private BasicEffect Effect;
         private Texture2D Texture;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="center">Center of Cuboid</param>
+        /// <param name="x">Dimension along x-Axis</param>
+        /// <param name="y">Dimension along y-Axis (height)</param>
+        /// <param name="z">Dimension along z-Axis</param>
         public Cube(Vector3 center, float x, float y, float z)
         {
             Verts[0].Position = center + Vector3.UnitX * (x / 2) + Vector3.UnitY * (y / 2) + Vector3.UnitZ * (z / 2);
@@ -48,11 +57,15 @@ namespace _3DPrototypMazeRunner
         //Initialize Cube
         public void Initialize(ContentManager contentManager, GraphicsDevice device)
         {
-            Texture = contentManager.Load<Texture2D>("wald_und_wiese");
+            Texture = contentManager.Load<Texture2D>("Textures/Cube");
             Verts[0].TextureCoordinate = new Vector2(0, 0);
             Verts[1].TextureCoordinate = new Vector2(1, 0);
             Verts[2].TextureCoordinate = new Vector2(1, 1);
             Verts[3].TextureCoordinate = new Vector2(0, 1);
+            Verts[4].TextureCoordinate = new Vector2(0,0);
+            Verts[5].TextureCoordinate = new Vector2(1,0);
+            Verts[6].TextureCoordinate = new Vector2(1,1);
+            Verts[7].TextureCoordinate = new Vector2(0,1);
 
             Verts[0].Color = Color.Black;
             Verts[1].Color = Color.DeepPink;

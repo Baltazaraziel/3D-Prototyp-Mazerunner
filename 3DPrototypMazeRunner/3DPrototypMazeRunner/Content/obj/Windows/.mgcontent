@@ -5,5 +5,7 @@
   <Config />
   <SourceFiles>
     <File>D:/Lisa/Documents/VisualStudio 2015/Projects/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/Textures/CheckerboardTile.png</File>
+    <File>D:/Lisa/Documents/VisualStudio 2015/Projects/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/Textures/Cube.png</File>
+    <File>D:/Lisa/Documents/VisualStudio 2015/Projects/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/Bitmaps/Level1.bmp</File>
   </SourceFiles>
 </SourceFileCollection>

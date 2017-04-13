@@ -12,7 +12,7 @@ namespace _3DPrototypMazeRunner
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Plane p1;
-        private Cube c1;
+        private Cuboid c1;
         private Map m1;
         public Game1()
         {
@@ -31,10 +31,12 @@ namespace _3DPrototypMazeRunner
             // TODO: Add your initialization logic here
             p1 = new Plane();
             p1.Initialize(Content, graphics.GraphicsDevice);
-            c1 = new Cube();
+            c1 = new Cuboid();
             c1.Initialize(Content, graphics.GraphicsDevice);
             m1 = new Map(1);
             m1.Initialize(Content, graphics.GraphicsDevice);
+
+            GraphicsDevice.RasterizerState = RasterizerState.CullNone;
             
             base.Initialize();
         }
@@ -87,7 +89,7 @@ namespace _3DPrototypMazeRunner
 
             Matrix Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
                 GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000.0f);
-            Matrix View = Matrix.CreateLookAt(new Vector3(100, 500, 100), new Vector3(150, 0, 150), Vector3.Up);
+            Matrix View = Matrix.CreateLookAt(new Vector3(100,75, 100), new Vector3(150, 0, 150), Vector3.Up);
             Matrix World = Matrix.Identity;
 
             //p1.Draw(Projection, View, World);

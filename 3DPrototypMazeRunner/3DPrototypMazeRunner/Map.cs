@@ -20,10 +20,12 @@ namespace _3DPrototypMazeRunner
         private Plane Ground;
         private List<Cuboid> Walls;
         //private List<Collectables> Collectables;
-        private Vector3 StartPos;
-        private Vector3 Destination;
+        public Vector3 StartPos;
+        public Vector3 Destination;
         private Vector2 Dimensions;
         private int Level;
+
+        //public static Vector3 Startpos { get; internal set; }
 
         /// <summary>
         /// Constructor
@@ -33,6 +35,7 @@ namespace _3DPrototypMazeRunner
         {
             Level = level;
         }
+
 
         /// <summary>
         /// Initializes members of Map and Loads Content

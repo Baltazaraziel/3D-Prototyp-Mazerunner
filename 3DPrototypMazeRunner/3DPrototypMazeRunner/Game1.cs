@@ -11,9 +11,11 @@ namespace _3DPrototypMazeRunner
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
         private Plane p1;
         private Cuboid c1;
         private Map m1;
+        private Player player;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -36,6 +38,8 @@ namespace _3DPrototypMazeRunner
             c1.Initialize(Content, graphics.GraphicsDevice);
             m1 = new Map(1);
             m1.Initialize(Content, graphics.GraphicsDevice);
+            player = new Player(m1.StartPos);
+            player.Initialize(Content, graphics.GraphicsDevice);
 
             DepthStencilState temp = new DepthStencilState();
             temp.DepthBufferEnable = true;
@@ -46,6 +50,7 @@ namespace _3DPrototypMazeRunner
             base.Initialize();
         }
 
+        // Brauchen wir die Funktion?
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -54,7 +59,6 @@ namespace _3DPrototypMazeRunner
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -80,7 +84,6 @@ namespace _3DPrototypMazeRunner
             // TODO: Add your update logic here
             //slowly zoom out
             height += 0.1f;
-
             base.Update(gameTime);
         }
 
@@ -99,12 +102,15 @@ namespace _3DPrototypMazeRunner
 
             Matrix Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
                 GraphicsDevice.Viewport.AspectRatio, 0.1f, 500.0f);
+            //Matrix View = Matrix.CreateLookAt(new Vector3( 100, height, 10), player.playerPosition, Vector3.Up);
             Matrix View =  Matrix.CreateLookAt(new Vector3(100,height, 100), new Vector3(150, 0, 150), Vector3.Up);
             Matrix World = Matrix.Identity;
 
             //p1.Draw(Projection, View, World);
             //c1.Draw(Projection, View, World);
             m1.Draw(Projection, View, World);
+            player.Draw(Projection, View, World);
+
 
             base.Draw(gameTime);
         }

@@ -20,10 +20,12 @@ namespace _3DPrototypMazeRunner
         private Plane Ground;
         private List<Cuboid> Walls;
         //private List<Collectables> Collectables;
-        private Vector3 StartPos;
-        private Vector3 Destination;
+        public Vector3 StartPos;
+        public Vector3 Destination;
         private Vector2 Dimensions;
         private int Level;
+
+        //public static Vector3 Startpos { get; internal set; }
 
         /// <summary>
         /// Constructor
@@ -33,6 +35,7 @@ namespace _3DPrototypMazeRunner
         {
             Level = level;
         }
+
 
         /// <summary>
         /// Initializes members of Map and Loads Content
@@ -84,11 +87,11 @@ namespace _3DPrototypMazeRunner
                     }
                     else if (check == Color.Red)
                     {
-                        StartPos = new Vector3(i, 0, j);
+                        StartPos = new Vector3(10*i +5.0f, 0, 10*j+5.0f);
                     }
                     else if (check == Color.Lime)
                     {
-                        Destination = new Vector3(i, 0, j);
+                        Destination = new Vector3(10 * i + 5.0f, 0, 10 * j + 5.0f);
                     }
                     else if (check == Color.Yellow)
                     {

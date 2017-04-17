@@ -27,3 +27,4 @@ D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMa
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Textures\ColorNoise32.xnb
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Textures\GrayNoise32.xnb
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Textures\GrayNoise64.xnb
+D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Models\Player.xnb

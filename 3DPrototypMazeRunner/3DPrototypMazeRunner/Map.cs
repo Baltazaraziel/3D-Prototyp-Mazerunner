@@ -61,6 +61,7 @@ namespace _3DPrototypMazeRunner
             //Set Ground
             Ground = new Plane(new Vector3(Dimensions.X/2*10, 0, Dimensions.Y/2*10), Vector3.Up, Vector3.UnitX, Dimensions.X*10, Dimensions.Y*10);
             Ground.Initialize(contentManager, device);
+            
 
             //Initialize Lists
             Walls = new List<Cuboid>();
@@ -105,11 +106,11 @@ namespace _3DPrototypMazeRunner
         /// <param name="world">World Matrix for Rendering</param>
         public void Draw(Matrix projection, Matrix view, Matrix world)
         {
-            Ground.Draw(projection, view, world);
             foreach (Cuboid c in Walls)
             {
                 c.Draw(projection, view, world);
             }
+            Ground.Draw(projection, view, world);
             /*foreach (Collectable col in Collectables)
             {
                 col.Draw(projection, view, world);

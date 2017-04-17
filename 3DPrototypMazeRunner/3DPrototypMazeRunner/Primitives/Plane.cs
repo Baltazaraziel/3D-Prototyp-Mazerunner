@@ -14,6 +14,8 @@ namespace _3DPrototypMazeRunner
         private Vector2 Dimensions;
         private Texture2D Texture;
         private BasicEffect Effect;
+        private VertexBuffer vBuffer;
+        private IndexBuffer iBuffer;
 
         public Plane(Vector3 center, Vector3 normal, Vector3 up, float width, float height)
         {
@@ -64,6 +66,14 @@ namespace _3DPrototypMazeRunner
             Verts[3].Color = Color.HotPink;
 
             Effect = new BasicEffect(device);
+
+            // Set up the vertex buffer
+            vBuffer = new VertexBuffer(device, typeof(VertexPositionColorTexture), 4, BufferUsage.WriteOnly);
+            vBuffer.SetData<VertexPositionColorTexture>(Verts);
+
+            // Set up index Buffer
+            iBuffer = new IndexBuffer(device, typeof(short), Indices.Length, BufferUsage.WriteOnly);
+            iBuffer.SetData(Indices);
         }
 
         //Draw Plane to Screen
@@ -73,16 +83,20 @@ namespace _3DPrototypMazeRunner
             Effect.View = view;
             Effect.World = world;
 
-            Effect.TextureEnabled = true;
-            //Effect.VertexColorEnabled = true;
+            //Effect.TextureEnabled = true;
+            Effect.VertexColorEnabled = true;
             Effect.Texture = Texture;
+
+            Effect.GraphicsDevice.SetVertexBuffer(vBuffer);
+            Effect.GraphicsDevice.Indices = iBuffer;
+
+
 
             foreach (EffectPass pass in Effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
 
-                Effect.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleList, Verts,
-                    0, 4, Indices, 0, 2);
+                Effect.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList,0,0,2);
             }
         }
 

@@ -11,10 +11,11 @@ namespace _3DPrototypMazeRunner
         Model pModel;
         // Set the position of the model in world space, and set the rotation.
         public Vector3 pPosition;
+        public Vector3 pVelocity = Vector3.Zero;
         public float pRotation = 0.0f;
         private float scale = 0.025f;
 
-        public Vector3 pVelocity = Vector3.Zero;
+        BoundingBox pBox;
 
         /// <summary>
         /// Constructor

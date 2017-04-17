@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Baltazar/Documents/GitHub/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/Textures/CheckerboardTile.png</SourceFile>
-  <SourceTime>2017-04-13T18:25:45.4834004+02:00</SourceTime>
-  <DestFile>C:/Users/Baltazar/Documents/GitHub/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/bin/Windows/Textures/CheckerboardTile.xnb</DestFile>
-  <DestTime>2017-04-13T19:01:51.6834004+02:00</DestTime>
+  <SourceFile>D:/Lisa/Documents/VisualStudio 2015/Projects/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/Textures/CheckerboardTile.png</SourceFile>
+  <SourceTime>2017-04-12T10:49:53.6466214+02:00</SourceTime>
+  <DestFile>D:/Lisa/Documents/VisualStudio 2015/Projects/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/bin/Windows/Textures/CheckerboardTile.xnb</DestFile>
+  <DestTime>2017-04-17T21:16:35.2057328+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

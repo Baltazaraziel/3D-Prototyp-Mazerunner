@@ -21,6 +21,7 @@ namespace _3DPrototypMazeRunner
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+           
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace _3DPrototypMazeRunner
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            p1 = new Plane();
+            p1 = new Plane(new Vector3(150,0,150), Vector3.Backward+Vector3.UnitY, Vector3.UnitX, 100, 100);
             p1.Initialize(Content, graphics.GraphicsDevice);
             c1 = new Cuboid();
             c1.Initialize(Content, graphics.GraphicsDevice);
@@ -41,8 +42,12 @@ namespace _3DPrototypMazeRunner
             player = new Player(m1.StartPos);
             player.Initialize(Content, graphics.GraphicsDevice);
 
-            GraphicsDevice.RasterizerState = RasterizerState.CullNone;
-            
+            DepthStencilState temp = new DepthStencilState();
+            temp.DepthBufferEnable = true;
+            temp.DepthBufferWriteEnable = true;
+
+            GraphicsDevice.DepthStencilState = temp;
+
             base.Initialize();
         }
 
@@ -80,6 +85,7 @@ namespace _3DPrototypMazeRunner
             UpdateInput();
             player.Update();
             // TODO: Add your update logic here
+<<<<<<< HEAD
 
             base.Update(gameTime);
         }
@@ -128,6 +134,15 @@ namespace _3DPrototypMazeRunner
                     player.pRotation = 0.0f;
                 }
         }
+=======
+            //slowly zoom out
+            height += 0.1f;
+            base.Update(gameTime);
+        }
+
+        //camera height
+        private float height = 100;
+>>>>>>> refs/remotes/origin/master
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -140,8 +155,14 @@ namespace _3DPrototypMazeRunner
             // TODO: Add your drawing code here
 
             Matrix Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
+<<<<<<< HEAD
                 GraphicsDevice.Viewport.AspectRatio, 0.001f, 1000.0f);
             Matrix View = Matrix.CreateLookAt(new Vector3( 100, 100, 10), player.pPosition, Vector3.Up);
+=======
+                GraphicsDevice.Viewport.AspectRatio, 0.1f, 500.0f);
+            //Matrix View = Matrix.CreateLookAt(new Vector3( 100, height, 10), player.playerPosition, Vector3.Up);
+            Matrix View =  Matrix.CreateLookAt(new Vector3(100,height, 100), new Vector3(150, 0, 150), Vector3.Up);
+>>>>>>> refs/remotes/origin/master
             Matrix World = Matrix.Identity;
 
             //p1.Draw(Projection, View, World);

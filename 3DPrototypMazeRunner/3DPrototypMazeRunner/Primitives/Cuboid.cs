@@ -18,6 +18,7 @@ namespace _3DPrototypMazeRunner
         private Texture2D Texture;
         private VertexBuffer vBuffer;
         private IndexBuffer iBuffer;
+        public BoundingBox cBox;
 
         /// <summary>
         /// Constructor
@@ -28,6 +29,9 @@ namespace _3DPrototypMazeRunner
         /// <param name="z">Dimension along z-Axis</param>
         public Cuboid(Vector3 center, float x, float y, float z)
         {
+            Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+
             Verts[0].Position = center + Vector3.UnitX * (x / 2) + Vector3.UnitY * (y / 2) + Vector3.UnitZ * (z / 2);
             Verts[1].Position = center + Vector3.UnitX * -(x / 2) + Vector3.UnitY * (y / 2) + Vector3.UnitZ * (z / 2);
             Verts[2].Position = center + Vector3.UnitX * -(x / 2) + Vector3.UnitY * -(y / 2) + Vector3.UnitZ * (z / 2);
@@ -51,6 +55,14 @@ namespace _3DPrototypMazeRunner
             Indices[33] = 7; Indices[34] = 0; Indices[35] = 1;
 
             Dimensions = new Vector3(x, y, z);
+
+            //create Boundingbox for cuboid
+            for (int i = 0; i < 8; i++)
+            {
+                min = Vector3.Min(min, Verts[i].Position);
+                max = Vector3.Max(max, Verts[i].Position);
+            }
+            cBox = new BoundingBox(min,max);
         }
 
         public Cuboid() : this(Vector3.Zero, 1.0f, 1.0f, 1.0f)

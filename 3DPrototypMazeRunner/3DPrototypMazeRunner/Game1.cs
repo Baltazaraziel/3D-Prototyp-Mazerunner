@@ -85,6 +85,9 @@ namespace _3DPrototypMazeRunner
             UpdateInput();
             player.Update();
             // TODO: Add your update logic here
+            if (collisionDetect())
+                player.pVelocity = Vector3.Zero;
+            
 
             base.Update(gameTime);
         }
@@ -135,6 +138,17 @@ namespace _3DPrototypMazeRunner
 
         }
 
+        public bool collisionDetect()
+        {
+            foreach (Cuboid c in m1.Walls)
+            {
+                if (player.pBox.Intersects(c.cBox))
+                    return true;
+                
+            }
+            return false;
+        }
+
         //camera height
         private float height = 100;
 
@@ -159,8 +173,7 @@ namespace _3DPrototypMazeRunner
             //c1.Draw(Projection, View, World);
             m1.Draw(Projection, View, World);
             player.Draw(Projection, View, World);
-
-
+            
             base.Draw(gameTime);
         }
     }

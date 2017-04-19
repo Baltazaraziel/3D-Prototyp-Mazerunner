@@ -14,8 +14,9 @@ namespace _3DPrototypMazeRunner
         public Vector3 pVelocity = Vector3.Zero;
         public float pRotation = 0.0f;
         private float scale = 0.025f;
+        public Matrix modelWorldMatrix = Matrix.Identity;
 
-        BoundingBox pBox;
+        public BoundingBox pBox;
 
         /// <summary>
         /// Constructor
@@ -23,6 +24,7 @@ namespace _3DPrototypMazeRunner
         public Player(Vector3 StartPos)
         {
             pPosition = StartPos;
+
         }
 
         /// <summary>
@@ -32,20 +34,61 @@ namespace _3DPrototypMazeRunner
         /// <param Graphicsdevice object="device"></param>
         public void Initialize(ContentManager contentManager, GraphicsDevice device)
         {
-            pModel = contentManager.Load<Model>("Models/Player");
+            pModel = contentManager.Load<Model>("Models/Playermodel v2");
+            pBox = GetBounds(); 
+        }
 
+        //creates a BoundingBox for the player
+        public BoundingBox GetBounds()
+        {
+            Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+
+            foreach (ModelMesh mesh in pModel.Meshes)
+            {
+                foreach (ModelMeshPart meshPart in mesh.MeshParts)
+                {
+                    int vertexStride = meshPart.VertexBuffer.VertexDeclaration.VertexStride;
+                    int vertexBufferSize = meshPart.NumVertices * vertexStride;
+
+                    int vertexDataSize = vertexBufferSize / sizeof(float);
+                    float[] vertexData = new float[vertexDataSize];
+                    meshPart.VertexBuffer.GetData<float>(vertexData);
+
+                    for (int i = 0; i < vertexDataSize; i += vertexStride / sizeof(float))
+                    {
+                        Vector3 vertex = new Vector3(vertexData[i], vertexData[i + 1], vertexData[i + 2]);
+                        min = Vector3.Min(min, vertex);
+                        max = Vector3.Max(max, vertex);
+                    }
+                }
+            }
+
+            return new BoundingBox(min, max);
         }
 
         public void Update()
         {
-            
-
             // Add velocity to the current position.
             pPosition += pVelocity;
 
             // Bleed off velocity over time.
-            pVelocity *= 0.95f;
+            pVelocity *= 0.875f;
 
+            // update the World matrix for the player model
+            modelWorldMatrix = modelWorldMatrix * Matrix.CreateScale(scale)
+            * Matrix.CreateRotationY(pRotation)
+            * Matrix.CreateTranslation(pPosition);
+
+            // extract the corners of the AABB into 8 vectors - 1 for each corner
+            Vector3[] obb = new Vector3[8];
+            pBox.GetCorners(obb);
+
+            // Transform the vectors by the model's world matrix
+            Vector3.Transform(obb, ref modelWorldMatrix, obb);
+
+            // create an AABB in world space from the OBB in world space
+            pBox = BoundingBox.CreateFromPoints(obb);
 
         }
        
@@ -65,7 +108,7 @@ namespace _3DPrototypMazeRunner
                     effect.EnableDefaultLighting();
                     //transforms mesh by scaling then rotating and translating
                     effect.World = transforms[mesh.ParentBone.Index] 
-                        * Matrix.CreateScale(scale) 
+                        * Matrix.CreateScale(scale)
                         * Matrix.CreateRotationY(pRotation)
                         * Matrix.CreateTranslation(pPosition);
                     effect.View = view;

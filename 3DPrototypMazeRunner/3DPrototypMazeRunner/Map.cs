@@ -18,7 +18,7 @@ namespace _3DPrototypMazeRunner
     class Map
     {
         private Plane Ground;
-        private List<Cuboid> Walls;
+        public List<Cuboid> Walls;
         //private List<Collectables> Collectables;
         public Vector3 StartPos;
         public Vector3 Destination;

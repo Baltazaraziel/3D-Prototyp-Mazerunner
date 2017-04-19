@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,12 +12,10 @@ namespace _3DPrototypMazeRunner
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
-        private Plane p1;
-        private Cuboid c1;
         private Map m1;
         private Player player;
+        private Hud hud;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,14 +32,18 @@ namespace _3DPrototypMazeRunner
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            p1 = new Plane(new Vector3(150, 0, 150), Vector3.Backward + Vector3.UnitY, Vector3.UnitX, 100, 100);
-            p1.Initialize(Content, graphics.GraphicsDevice);
-            c1 = new Cuboid();
-            c1.Initialize(Content, graphics.GraphicsDevice);
+            //make Windowed full screen
+            graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+            //graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+
             m1 = new Map(1);
             m1.Initialize(Content, graphics.GraphicsDevice);
             player = new Player(m1.StartPos);
             player.Initialize(Content, graphics.GraphicsDevice);
+            hud = new Hud();
+            hud.Initialize(Content, graphics.GraphicsDevice);
 
             DepthStencilState temp = new DepthStencilState();
             temp.DepthBufferEnable = true;
@@ -58,8 +61,6 @@ namespace _3DPrototypMazeRunner
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
 
@@ -84,6 +85,8 @@ namespace _3DPrototypMazeRunner
             // Get some input.
             UpdateInput();
             player.Update();
+            m1.Update(gameTime, player);
+            hud.Update(m1);
             // TODO: Add your update logic here
             if (collisionDetect())
                 player.pVelocity = Vector3.Zero;
@@ -169,11 +172,11 @@ namespace _3DPrototypMazeRunner
             //Matrix View =  Matrix.CreateLookAt(new Vector3(100,height, 100), new Vector3(150, 0, 150), Vector3.Up);
             Matrix World = Matrix.Identity;
 
-            //p1.Draw(Projection, View, World);
-            //c1.Draw(Projection, View, World);
             m1.Draw(Projection, View, World);
             player.Draw(Projection, View, World);
-            
+
+            hud.Draw();
+
             base.Draw(gameTime);
         }
     }

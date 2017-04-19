@@ -34,6 +34,7 @@ namespace _3DPrototypMazeRunner
         /// <param Graphicsdevice object="device"></param>
         public void Initialize(ContentManager contentManager, GraphicsDevice device)
         {
+
             pModel = contentManager.Load<Model>("Models/Playermodel v2");
             pBox = GetBounds(); 
         }
@@ -87,8 +88,10 @@ namespace _3DPrototypMazeRunner
             // Transform the vectors by the model's world matrix
             Vector3.Transform(obb, ref modelWorldMatrix, obb);
 
+
             // create an AABB in world space from the OBB in world space
             pBox = BoundingBox.CreateFromPoints(obb);
+
 
         }
        

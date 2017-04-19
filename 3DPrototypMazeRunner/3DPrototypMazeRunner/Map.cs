@@ -18,12 +18,19 @@ namespace _3DPrototypMazeRunner
     class Map
     {
         private Plane Ground;
-        public List<Cuboid> Walls;
-        //private List<Collectables> Collectables;
+
+        private List<Cuboid> Walls;
+        private List<Collectable> Collectables;
+
         public Vector3 StartPos;
         public Vector3 Destination;
         private Vector2 Dimensions;
         private int Level;
+        public TimeSpan Timer;
+        private float Second;
+        public bool Won;
+        public bool Lost;
+        private Model FinishingPole;
 
         //public static Vector3 Startpos { get; internal set; }
 
@@ -34,6 +41,8 @@ namespace _3DPrototypMazeRunner
         public Map(int level)
         {
             Level = level;
+            Won = false;
+            Lost = false;
         }
 
 
@@ -52,6 +61,7 @@ namespace _3DPrototypMazeRunner
             {
                 case 1:
                     tex = contentManager.Load<Texture2D>("Bitmaps/Level1");
+                    Timer = new TimeSpan(0,0,5,0);
                     break;
                 default:
                     tex = contentManager.Load<Texture2D>("Bitmaps/Level1");
@@ -68,7 +78,7 @@ namespace _3DPrototypMazeRunner
 
             //Initialize Lists
             Walls = new List<Cuboid>();
-            //Collectables = new List<Collectables>();
+            Collectables = new List<Collectable>();
 
             //Build Level based on Colors used in Bitmap
             Color[] colors1D = new Color[(int)Dimensions.X * (int)Dimensions.Y];
@@ -91,14 +101,56 @@ namespace _3DPrototypMazeRunner
                     }
                     else if (check == Color.Lime)
                     {
+                        FinishingPole = contentManager.Load<Model>("Models/Pole");
                         Destination = new Vector3(10 * i + 5.0f, 0, 10 * j + 5.0f);
                     }
                     else if (check == Color.Yellow)
                     {
-                        //Collectables.Add();
+                        Collectable col = new Collectable(new Vector3(10*i + 5.0f, 6.0f, 10*j + 5.0f));
+                        col.Initialize(contentManager, device);
+                        Collectables.Add(col);
                     }
                 }
             }
+        }
+
+        public void Update(GameTime gTime, Player player)
+        {
+            if ((Math.Abs(player.pPosition.X - Destination.X) < 4.0f
+                  && Math.Abs(player.pPosition.Z - Destination.Z) < 4.0f && Collectables.Count == 0) || Won)
+            {
+                Won = true;
+            }
+            else if (Timer.Seconds < 1 && Timer.Minutes < 1)
+            {
+                Lost = true;
+            }
+            else
+            {
+                Second += (float) gTime.ElapsedGameTime.TotalSeconds;
+                Timer -= new TimeSpan(0, 0, 0, (int)Second);
+                if (Second > 1.0f)
+                {
+                    Second = 0.0f;
+                }
+            }
+            //Update which Collectables are still there
+            Collectable removeCollectable = null;
+            foreach (Collectable col in Collectables)
+            {   
+                col.Update(gTime, player);
+                if (col.isCollected)
+                {
+                    removeCollectable = col;
+                    Console.WriteLine(col);
+                }
+            }
+            Collectables.Remove(removeCollectable);
+        }
+
+        public int NumberCollectablesLeft()
+        {
+            return Collectables.Count;
         }
 
         /// <summary>
@@ -114,10 +166,26 @@ namespace _3DPrototypMazeRunner
                 c.Draw(projection, view, world);
             }
             Ground.Draw(projection, view, world);
-            /*foreach (Collectable col in Collectables)
+            foreach (Collectable col in Collectables)
             {
-                col.Draw(projection, view, world);
-            }*/
+                if(!col.isCollected)
+                {
+                    col.Draw(projection, view, world);
+                }
+            }
+            foreach (ModelMesh mesh in FinishingPole.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.EnableDefaultLighting();
+
+                    effect.World = Matrix.CreateScale(5)*Matrix.CreateWorld(Destination, Vector3.UnitZ, Vector3.Up);
+                    effect.View = view;
+                    effect.Projection = projection;
+                }
+
+                mesh.Draw();
+            }
         }
 
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Baltazar/Documents/GitHub/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/Textures/ColorNoise32.png</SourceFile>
-  <SourceTime>2017-04-13T19:00:01.9994004+02:00</SourceTime>
-  <DestFile>C:/Users/Baltazar/Documents/GitHub/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/bin/Windows/Textures/ColorNoise32.xnb</DestFile>
-  <DestTime>2017-04-17T23:21:05.1335002+02:00</DestTime>
+  <SourceFile>D:/Lisa/Documents/VisualStudio 2015/Projects/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/Textures/ColorNoise32.png</SourceFile>
+  <SourceTime>2017-04-13T17:42:35.0737061+02:00</SourceTime>
+  <DestFile>D:/Lisa/Documents/VisualStudio 2015/Projects/3D-Prototyp-Mazerunner/3DPrototypMazeRunner/3DPrototypMazeRunner/Content/bin/Windows/Textures/ColorNoise32.xnb</DestFile>
+  <DestTime>2017-04-19T11:18:23.3218397+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

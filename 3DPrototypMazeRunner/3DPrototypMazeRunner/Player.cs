@@ -32,7 +32,7 @@ namespace _3DPrototypMazeRunner
         /// <param Graphicsdevice object="device"></param>
         public void Initialize(ContentManager contentManager, GraphicsDevice device)
         {
-            pModel = contentManager.Load<Model>("Models/Player");
+            pModel = contentManager.Load<Model>("Models/Schorsch");
 
         }
 
@@ -45,7 +45,6 @@ namespace _3DPrototypMazeRunner
 
             // Bleed off velocity over time.
             pVelocity *= 0.95f;
-
 
         }
        

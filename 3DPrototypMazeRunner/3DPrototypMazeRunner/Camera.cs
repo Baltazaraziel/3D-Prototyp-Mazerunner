@@ -11,12 +11,14 @@ namespace _3DPrototypMazeRunner
 {
     class Camera
     {
-        public Vector3 Position { get { return m_Position; } set { m_Position = value; } }
-        public Vector3 LookAt { get { return m_LookAt; } set { m_LookAt = value; } }
         private Vector3 m_Position;
         private Vector3 m_LookAt;
-        private Matrix View;
-        private Matrix Projection;
+        public Vector3 Position { get { return m_Position; } set { m_Position = value; } }
+        public Vector3 LookAt { get { return m_LookAt; } set { m_LookAt = value; } }
+        private Matrix m_View;
+        private Matrix m_Projection;
+        private Matrix View { get { return m_View; } set { } }
+        private Matrix Projection { get { return m_Projection; } set { } }
 
         public Camera(Vector3 position, Vector3 lookat, GraphicsDevice device)
         {

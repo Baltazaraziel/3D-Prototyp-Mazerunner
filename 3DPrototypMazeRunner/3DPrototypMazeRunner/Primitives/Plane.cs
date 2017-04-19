@@ -53,12 +53,12 @@ namespace _3DPrototypMazeRunner
         //Initialize Plane with Texture and set BasicEffect
         public void Initialize(ContentManager contentManager, GraphicsDevice device)
         {
-            Texture = contentManager.Load<Texture2D>("Textures/CheckerboardTile");
+            Texture = contentManager.Load<Texture2D>("Textures/FloorTile30");
 
             Verts[0].TextureCoordinate = new Vector2(0, 0);
-            Verts[1].TextureCoordinate = new Vector2(1, 0);
-            Verts[2].TextureCoordinate = new Vector2(1, 1);
-            Verts[3].TextureCoordinate = new Vector2(0, 1);
+            Verts[1].TextureCoordinate = new Vector2(Dimensions.X/3+Dimensions.X%3, 0);
+            Verts[2].TextureCoordinate = new Vector2(Dimensions.X / 3 + Dimensions.X % 3, Dimensions.Y / 3 + Dimensions.Y % 3);
+            Verts[3].TextureCoordinate = new Vector2(0, Dimensions.Y / 3 + Dimensions.Y % 3);
 
             Verts[0].Color = Color.Black;
             Verts[1].Color = Color.DeepPink;
@@ -83,8 +83,8 @@ namespace _3DPrototypMazeRunner
             Effect.View = view;
             Effect.World = world;
 
-            //Effect.TextureEnabled = true;
-            Effect.VertexColorEnabled = true;
+            Effect.TextureEnabled = true;
+            //Effect.VertexColorEnabled = true;
             Effect.Texture = Texture;
 
             Effect.GraphicsDevice.SetVertexBuffer(vBuffer);

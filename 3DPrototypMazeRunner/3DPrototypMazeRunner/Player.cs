@@ -33,7 +33,7 @@ namespace _3DPrototypMazeRunner
         public void Initialize(ContentManager contentManager, GraphicsDevice device)
         {
             pModel = contentManager.Load<Model>("Models/Player");
-            //modelPosition = Map.Startpos;
+
         }
 
         public void Update()

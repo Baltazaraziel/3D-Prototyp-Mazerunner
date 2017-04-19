@@ -85,9 +85,6 @@ namespace _3DPrototypMazeRunner
             UpdateInput();
             player.Update();
             // TODO: Add your update logic here
-            //slowly zoom out
-            height += 0.1f;
-            
 
             base.Update(gameTime);
         }
@@ -154,9 +151,8 @@ namespace _3DPrototypMazeRunner
 
             Matrix Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
                 GraphicsDevice.Viewport.AspectRatio, 0.1f, 500.0f);
-            //Matrix View = Matrix.CreateLookAt(new Vector3( 100, height, 10), player.playerPosition, Vector3.Up);
-            Matrix View = Matrix.CreateLookAt(new Vector3(100, height, 100), new Vector3(150, 0, 150), Vector3.Up);
-
+            Matrix View = Matrix.CreateLookAt(new Vector3( 100, 100, 10), player.pPosition, Vector3.Up);
+            //Matrix View =  Matrix.CreateLookAt(new Vector3(100,height, 100), new Vector3(150, 0, 150), Vector3.Up);
             Matrix World = Matrix.Identity;
 
             //p1.Draw(Projection, View, World);

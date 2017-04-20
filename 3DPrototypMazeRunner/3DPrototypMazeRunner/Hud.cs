@@ -56,16 +56,16 @@ namespace _3DPrototypMazeRunner
                 if (nbCollectables > 0)
                 {
                     spriteBatch.DrawString(font, "You need to Collect another " + nbCollectables + " Collectables",
-                        new Vector2(graphicsDevice.DisplayMode.Width/2 - 200, 10), Color.DarkRed);
+                        new Vector2(graphicsDevice.DisplayMode.Width/2 - 300, 10), Color.Gray);
                     spriteBatch.DrawString(font, timeLeft.Minutes + "min " + timeLeft.Seconds + "sec left",
-                        new Vector2(graphicsDevice.DisplayMode.Width/2 - 200, 30), Color.DarkRed);
+                        new Vector2(graphicsDevice.DisplayMode.Width/2 - 300, 50), Color.Gray);
                 }
                 else
                 {
                     spriteBatch.DrawString(font, "Find the End of the maze",
-                    new Vector2(graphicsDevice.DisplayMode.Width / 2 - 200, 10), Color.DarkRed);
+                    new Vector2(graphicsDevice.DisplayMode.Width / 2 - 300, 10), Color.DarkRed);
                     spriteBatch.DrawString(font, timeLeft.Minutes + "min " + timeLeft.Seconds + "sec left",
-                        new Vector2(graphicsDevice.DisplayMode.Width / 2 - 200, 30), Color.DarkRed);
+                        new Vector2(graphicsDevice.DisplayMode.Width / 2 - 300, 50), Color.Gray);
                 }
                 
             }
@@ -74,13 +74,13 @@ namespace _3DPrototypMazeRunner
             {
                 spriteBatch.DrawString(font, "You beat the Maze with " +
                                              timeLeft.Minutes + "min " + timeLeft.Seconds + "sec left",
-                    new Vector2(graphicsDevice.DisplayMode.Width/2 - 400, 10), Color.DarkRed);
+                    new Vector2(graphicsDevice.DisplayMode.Width/2 -600, 10), Color.Gray);
             }
             //lost the game
             else
             {
                 spriteBatch.DrawString(font, "You lost",
-                    new Vector2(graphicsDevice.DisplayMode.Width / 2 - 200, 10), Color.DarkRed);
+                    new Vector2(graphicsDevice.DisplayMode.Width / 2 - 300, 10), Color.Gray);
             }
             
             spriteBatch.End();

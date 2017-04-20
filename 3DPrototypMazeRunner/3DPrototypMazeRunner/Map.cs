@@ -18,8 +18,10 @@ namespace _3DPrototypMazeRunner
     class Map
     {
         private Plane Ground;
-        private List<Cuboid> Walls;
+
+        public List<Cuboid> Walls;
         private List<Collectable> Collectables;
+
         public Vector3 StartPos;
         public Vector3 Destination;
         private Vector2 Dimensions;
@@ -177,7 +179,7 @@ namespace _3DPrototypMazeRunner
                 {
                     effect.EnableDefaultLighting();
 
-                    effect.World = Matrix.CreateScale(5)*Matrix.CreateWorld(Destination, Vector3.UnitZ, Vector3.Up);
+                    effect.World = Matrix.CreateScale(9)*Matrix.CreateWorld(Destination, Vector3.UnitZ, Vector3.Up);
                     effect.View = view;
                     effect.Projection = projection;
                 }

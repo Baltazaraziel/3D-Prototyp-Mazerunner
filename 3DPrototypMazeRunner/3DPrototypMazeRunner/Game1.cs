@@ -16,6 +16,8 @@ namespace _3DPrototypMazeRunner
         private Map m1;
         private Player player;
         private Hud hud;
+        private Camera camera;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -44,6 +46,7 @@ namespace _3DPrototypMazeRunner
             player.Initialize(Content, graphics.GraphicsDevice);
             hud = new Hud();
             hud.Initialize(Content, graphics.GraphicsDevice);
+            camera = new Camera(player.pPosition+new Vector3(0,11,8), player.pPosition+new Vector3(0, 8, 0), GraphicsDevice);
 
             DepthStencilState temp = new DepthStencilState();
             temp.DepthBufferEnable = true;
@@ -85,9 +88,13 @@ namespace _3DPrototypMazeRunner
             // Get some input.
             UpdateInput();
             player.Update();
+            camera.Update(gameTime, player);
             m1.Update(gameTime, player);
             hud.Update(m1);
             // TODO: Add your update logic here
+            if (collisionDetect())
+                player.pVelocity = Vector3.Zero;
+            
 
             base.Update(gameTime);
         }
@@ -99,34 +106,48 @@ namespace _3DPrototypMazeRunner
             // Get the keyboard state.
             KeyboardState currentKeyState = Keyboard.GetState();
             if (currentKeyState.IsKeyDown(Keys.A))
+            {
                 player.pRotation += 0.10f;
+                camera.RotateY(0.1f);
+                camera.Rotation += 0.1f;
+            }
             else if (currentKeyState.IsKeyDown(Keys.D))
+            {
                 player.pRotation -= 0.10f;
+                camera.RotateY(-0.1f);
+                camera.Rotation -= 0.1f;
+            }
             else
+            {
                 // Rotate the model using the left thumbstick, and scale it down
-                player.pRotation -= currentState.ThumbSticks.Left.X * 0.10f;
-
+                player.pRotation -= currentState.ThumbSticks.Left.X*0.10f;
+                camera.RotateY(-currentState.ThumbSticks.Left.X*0.10f);
+                camera.Rotation -= currentState.ThumbSticks.Left.X*0.10f;
+            }
             // Create some velocity if the right trigger is down.
             Vector3 playerVelocityAdd = Vector3.Zero;
-
+            
             // Find out what direction we should be thrusting, 
             // using rotation.
-            playerVelocityAdd.X = -(float)Math.Sin(player.pRotation);
-            playerVelocityAdd.Z = -(float)Math.Cos(player.pRotation);
-
+            playerVelocityAdd.X = -(float) Math.Sin(player.pRotation);
+            playerVelocityAdd.Z = -(float) Math.Cos(player.pRotation);
+            
             if (currentKeyState.IsKeyDown(Keys.W))
-                playerVelocityAdd *= 0.05f;
+            {
+                playerVelocityAdd.Normalize();
+                playerVelocityAdd *= 0.35f;
+            }
             else
+            {
                 // Now scale our direction by how hard the trigger is down.
                 playerVelocityAdd *= currentState.Triggers.Right;
-
+            }
             // Finally, add this vector to our velocity.
-            player.pVelocity += playerVelocityAdd;
+            player.pVelocity = playerVelocityAdd;
 
             GamePad.SetVibration(PlayerIndex.One,
-                currentState.Triggers.Right,
-                currentState.Triggers.Right);
-
+                    currentState.Triggers.Right,
+                    currentState.Triggers.Right);
 
             // In case you get lost, press A or Enter to warp back to the center.
             if (currentState.Buttons.A == ButtonState.Pressed || currentKeyState.IsKeyDown(Keys.Enter))
@@ -134,13 +155,21 @@ namespace _3DPrototypMazeRunner
                 player.pPosition = m1.StartPos;
                 player.pVelocity = Vector3.Zero;
                 player.pRotation = 0.0f;
+                camera.Reset();
             }
 
         }
 
-        //camera height
-        private float height = 100;
-
+        public bool collisionDetect()
+        {
+            foreach (Cuboid c in m1.Walls)
+            {
+                if (player.pBox.Intersects(c.cBox))
+                    return true;
+                
+            }
+            return false;
+        }
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -148,18 +177,12 @@ namespace _3DPrototypMazeRunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.LightSkyBlue);
 
-            // TODO: Add your drawing code here
-
-            Matrix Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
-                GraphicsDevice.Viewport.AspectRatio, 0.1f, 500.0f);
-            Matrix View = Matrix.CreateLookAt(new Vector3( 100, 100, 10), player.pPosition, Vector3.Up);
-            //Matrix View =  Matrix.CreateLookAt(new Vector3(100,height, 100), new Vector3(150, 0, 150), Vector3.Up);
             Matrix World = Matrix.Identity;
 
-            m1.Draw(Projection, View, World);
-            player.Draw(Projection, View, World);
+            m1.Draw(camera.Projection, camera.View, World);
+            player.Draw(camera.Projection, camera.View, World);
             hud.Draw();
 
             base.Draw(gameTime);

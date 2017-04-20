@@ -18,6 +18,8 @@ namespace _3DPrototypMazeRunner
         private Hud hud;
         private Camera camera;
 
+        public Vector3 playerVelocityAdd = Vector3.Zero;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -87,14 +89,17 @@ namespace _3DPrototypMazeRunner
                 Exit();
             // Get some input.
             UpdateInput();
-            player.Update();
+            // Detect Collision each frame
+            if (collisionDetect())
+            {
+                player.pPosition -= playerVelocityAdd;
+                playerVelocityAdd = Vector3.Zero;
+            }
+                
+            player.Update(playerVelocityAdd);
             camera.Update(gameTime, player);
             m1.Update(gameTime, player);
-            hud.Update(m1);
-            // TODO: Add your update logic here
-            if (collisionDetect())
-                player.pVelocity = Vector3.Zero;
-            
+            hud.Update(m1);   
 
             base.Update(gameTime);
         }
@@ -125,7 +130,7 @@ namespace _3DPrototypMazeRunner
                 camera.Rotation -= currentState.ThumbSticks.Left.X*0.10f;
             }
             // Create some velocity if the right trigger is down.
-            Vector3 playerVelocityAdd = Vector3.Zero;
+            
             
             // Find out what direction we should be thrusting, 
             // using rotation.
@@ -143,7 +148,7 @@ namespace _3DPrototypMazeRunner
                 playerVelocityAdd *= currentState.Triggers.Right;
             }
             // Finally, add this vector to our velocity.
-            player.pVelocity = playerVelocityAdd;
+            
 
             GamePad.SetVibration(PlayerIndex.One,
                     currentState.Triggers.Right,
@@ -164,7 +169,7 @@ namespace _3DPrototypMazeRunner
         {
             foreach (Cuboid c in m1.Walls)
             {
-                if (player.pBox.Intersects(c.cBox))
+                if (player.worldpBox.Intersects(c.cBox))
                     return true;
                 
             }

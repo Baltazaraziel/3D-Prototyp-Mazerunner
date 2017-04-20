@@ -64,3 +64,10 @@ D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMa
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Fonts\SpriteFont\SKEWED_SLASH.xnb
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Models\Pole.xnb
 D:\Lisa\Documents\VisualStudio 2015\Projects\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Models\Schorsch.xnb
+C:\Users\Baltazar\Documents\GitHub\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Fonts\SpriteFont\SKEWED_SLASH.xnb
+C:\Users\Baltazar\Documents\GitHub\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Models\Collectable.xnb
+C:\Users\Baltazar\Documents\GitHub\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Models\Playermodel v2.xnb
+C:\Users\Baltazar\Documents\GitHub\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Models\Pole.xnb
+C:\Users\Baltazar\Documents\GitHub\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Models\Schorsch.xnb
+C:\Users\Baltazar\Documents\GitHub\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Textures\FloorTile.xnb
+C:\Users\Baltazar\Documents\GitHub\3D-Prototyp-Mazerunner\3DPrototypMazeRunner\3DPrototypMazeRunner\bin\Windows\x86\Debug\Content\Textures\FloorTile30.xnb

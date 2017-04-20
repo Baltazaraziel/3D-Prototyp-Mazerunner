@@ -26,13 +26,12 @@ namespace _3DPrototypMazeRunner
         public Vector3 Destination;
         private Vector2 Dimensions;
         private int Level;
+
         public TimeSpan Timer;
         private float Second;
         public bool Won;
         public bool Lost;
         private Model FinishingPole;
-
-        //public static Vector3 Startpos { get; internal set; }
 
         /// <summary>
         /// Constructor

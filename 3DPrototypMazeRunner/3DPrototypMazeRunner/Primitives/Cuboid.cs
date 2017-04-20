@@ -12,7 +12,7 @@ namespace _3DPrototypMazeRunner
     {
         private VertexPositionColorTexture[] Verts = new VertexPositionColorTexture[8];
         private short[] Indices = new short[6*6];
-        private Vector3 Position;
+        //private Vector3 Position;
         private Vector3 Dimensions;
         private BasicEffect Effect;
         private Texture2D Texture;
@@ -29,8 +29,6 @@ namespace _3DPrototypMazeRunner
         /// <param name="z">Dimension along z-Axis</param>
         public Cuboid(Vector3 center, float x, float y, float z)
         {
-            Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-            Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
 
             Verts[0].Position = center + Vector3.UnitX * (x / 2) + Vector3.UnitY * (y / 2) + Vector3.UnitZ * (z / 2);
             Verts[1].Position = center + Vector3.UnitX * -(x / 2) + Vector3.UnitY * (y / 2) + Vector3.UnitZ * (z / 2);
@@ -57,12 +55,8 @@ namespace _3DPrototypMazeRunner
             Dimensions = new Vector3(x, y, z);
 
             //create Boundingbox for cuboid
-            for (int i = 0; i < 8; i++)
-            {
-                min = Vector3.Min(min, Verts[i].Position);
-                max = Vector3.Max(max, Verts[i].Position);
-            }
-            cBox = new BoundingBox(min,max);
+            cBox = new BoundingBox(Verts[4].Position,Verts[0].Position);
+
         }
 
         public Cuboid() : this(Vector3.Zero, 1.0f, 1.0f, 1.0f)
